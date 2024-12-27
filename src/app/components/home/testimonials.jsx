@@ -24,7 +24,7 @@ export default function Testimonials() {
   ]
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-200">
+    <section className="py-16 bg-gradient-to-b ">
       <div className=" px-4 md:px-6 mx-auto">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -38,7 +38,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, i) => (
             <div
               key={i}
-              className="relative flex flex-col p-6 bg-white rounded-2xl shadow-sm"
+              className="relative flex flex-col p-6 bg-white rounded-2xl shadow-lg"
             >
               <div className="flex space-x-1 mb-4">
                
