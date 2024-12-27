@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function JobCard() {
+export default function JobCard({width}) {
     return (
-        <div className='w-[90%] h-52 bg-gray-100 rounded-md mt-4 '>
+        <div className={`w-[${width}] h-52 bg-gray-100 rounded-md mt-4`}>
             <div className='flex justify-between items-center w-full h-8 '>
 
                 <div className=' bg-[#30968837] w-28 h-7 ml-2 rounded-lg'>

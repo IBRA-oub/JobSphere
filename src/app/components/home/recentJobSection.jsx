@@ -25,9 +25,9 @@ export default function RecentJobSection() {
                     </div>
                 </div>
                 <div className='flex flex-col  items-center w-full mt-5'>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
+                <JobCard width={'90%'}/>
+                <JobCard width={'90%'}/>
+                <JobCard width={'90%'}/>
                 </div>
             </div>
 

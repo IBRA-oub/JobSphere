@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
           </div>
           <div className="flex justify-between w-96  text-gray-400 ">
             <Link href="/" className="hover:text-white">Home </Link>
-            <Link href="/" className="hover:text-white">Jobs </Link>
+            <Link href="/pages/all-job" className="hover:text-white">Jobs </Link>
             <Link href="/" className="hover:text-white">About Us </Link>
             <Link href="/" className="hover:text-white">Contact Us </Link>
           </div>
