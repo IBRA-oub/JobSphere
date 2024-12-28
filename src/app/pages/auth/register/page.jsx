@@ -62,7 +62,7 @@ export default function page() {
                     </form>
 
                     <div className='w-[80%]  text-center h-10  text-sm font-light'>
-                        <Link href="/auth/login">
+                        <Link href="/pages/auth/login">
 
                             <span className='text-black'>
                                 Have an account?

@@ -43,7 +43,7 @@ export default function Login() {
               Submit
             </button>
             <div className='w-[80%] text-end  text-sm font-light'>
-              <Link href="/auth/register">
+              <Link href="/pages/auth/register">
                 <span className='text-white'>
                   haven't account?
                 </span>
