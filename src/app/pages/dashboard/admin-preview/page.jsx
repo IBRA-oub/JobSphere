@@ -1,4 +1,5 @@
-import MainDashboard from '@/app/components/dashboard/mainDashboard'
+
+import MainPreview from '@/app/components/dashboard/mainPreview'
 import Sidebar from '@/app/components/dashboard/sidebar'
 import TopNav from '@/app/components/dashboard/topNav'
 import React from 'react'
@@ -12,10 +13,10 @@ export default function page() {
         </div>
         <div className='h-auto w-[78%] bg-white '>
           <div className='w-full h-[10%] '>
-            <TopNav sectionName={'Dashboard'} />
+            <TopNav sectionName={'Preview'} />
           </div>
           <div className='w-full h-[90%] '>
-            <MainDashboard />
+          <MainPreview/>
           </div>
 
         </div>
