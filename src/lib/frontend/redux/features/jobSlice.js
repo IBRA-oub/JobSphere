@@ -10,7 +10,7 @@ const initialState = {
 
 export const getJobs = createAsyncThunk('jobs/getJobs', async (_,{ rejectWithValue }) => {
     try {
-        const response = await axios.get('http://localhost:3030/users-function/all-job-offer-for-users',{cache:'no-store'});
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users-function/all-job-offer-for-users`,{cache:'no-store'});
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
