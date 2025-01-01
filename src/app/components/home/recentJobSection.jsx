@@ -1,8 +1,26 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import JobCard from './jobCard'
 import Link from 'next/link'
+import { jobSelectors } from '@/lib/frontend/redux/selectors/jobSelectors'
+import { useDispatch, useSelector } from 'react-redux'
+import { getJobs } from '@/lib/frontend/redux/features/jobSlice'
 
 export default function RecentJobSection() {
+    const jobs = useSelector(jobSelectors)
+    const allJobs = jobs.jobs;
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getJobs());
+    }, [dispatch]);
+
+
+    const recentJobs = [...allJobs]
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+        .slice(0, 4);
+
+
     return (
         <section className='mt-10 w-full  flex justify-center'>
             <div className='w-[95%] h-full '>
@@ -27,11 +45,12 @@ export default function RecentJobSection() {
 
                     </div>
                 </div>
-                <div className='flex flex-col  items-center w-full mt-5'>
-                    <JobCard width={'90%'} />
-                    <JobCard width={'90%'} />
-                    <JobCard width={'90%'} />
-                </div>
+                {recentJobs?.map((job, index) => (
+                    <div key={index} className='flex flex-col  items-center w-full mt-5'>
+                        <JobCard width={'90%'} job={job} />
+                    </div>
+                )) }
+
             </div>
 
 
