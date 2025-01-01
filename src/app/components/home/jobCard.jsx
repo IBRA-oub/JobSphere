@@ -1,4 +1,6 @@
 "use client"
+
+import Link from 'next/link'
 import React from 'react'
 
 export default function JobCard({ width, job }) {
@@ -71,9 +73,9 @@ export default function JobCard({ width, job }) {
                     </div>
 
                 </div>
-                <div className='mr-3 px-4 py-2 bg-[#309688] rounded-md text-white cursor-pointer hover:bg-[#25756a] hover:shadow-sm  transition duration-300 ease-in-out'>
+                <Link href={`/pages/page/all-job/${job._id}`} className='mr-3 px-4 py-2 bg-[#309688] rounded-md text-white cursor-pointer hover:bg-[#25756a] hover:shadow-sm  transition duration-300 ease-in-out'>
                     Job Details
-                </div>
+                </Link>
 
             </div>
 
