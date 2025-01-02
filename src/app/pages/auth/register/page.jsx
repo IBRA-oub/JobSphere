@@ -1,7 +1,53 @@
+"use client"
+import { register } from '@/lib/frontend/redux/features/registerSlice';
+import { registerSelectors } from '@/lib/frontend/redux/selectors/registerSelectors';
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from "react-toastify";
+import {useRouter} from "next/navigation";
+
 
 export default function page() {
+    const selector = useSelector(registerSelectors)
+    // console.log(selector)
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const [data, setData] = useState({
+        fullName: '',
+        phoneNumber: '',
+        email: '',
+        password: '',
+    });
+
+    const handleChange = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        try {
+            const response = await dispatch(register(data))
+            console.log('respoonse', response.payload.status)
+            if (response.payload.status == 409) {
+                toast.error('Email Already Exist');
+            }
+            else if (response.payload.status == 500) {
+                toast.error('All Input Required');
+            }
+             else if (response) {
+                toast.success('registration successfully');
+                router.push('/pages/dashboard/user-dashboard');
+            }
+            else {
+                toast.error('Something Wrong');
+            }
+        } catch (error) {
+
+        }
+
+    }
+
     return (
         <section className='relative h-[100vh] w-full shadow-2xl flex justify-center items-center'>
             <img src="/images/register.png" alt="login image" className='absolute h-[95%] w-[97%] z-0 rounded-[40px]' />
@@ -12,27 +58,27 @@ export default function page() {
                         <p className='bungee mb-4 text-black'>Create Account</p>
                     </div>
 
-                    <form action="" className=' h-auto flex flex-col items-center   w-[90%]  '>
+                    <form onSubmit={handleSubmit} className=' h-auto flex flex-col items-center   w-[90%]  '>
                         <div className='flex w-[80%] justify-between '>
                             <div className='flex flex-col w-[48%]'>
                                 <label htmlFor="" className='text-black font-base '> fullName:</label>
-                                <input type="text" placeholder='bahim oubourrih' className='mt-2 border-2 border-gray-300 h-11 font-light rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2  ' />
+                                <input onChange={handleChange} name='fullName' type="text" placeholder='bahim oubourrih' className='mt-2 border-2 border-gray-300 h-11 font-light rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2  ' />
                             </div>
                             <div className='flex flex-col w-[48%]'>
                                 <label htmlFor="" className='text-black font-base'> Phone Number:</label>
-                                <input type="number" placeholder='061234567' className='mt-2 font-light border-2 border-gray-300 h-11 rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2' />
+                                <input onChange={handleChange} name='phoneNumber' type="number" placeholder='061234567' className='mt-2 font-light border-2 border-gray-300 h-11 rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2' />
 
                             </div>
                         </div>
 
                         <div className='flex flex-col w-[80%] mt-6'>
                             <label htmlFor="" className='text-black font-base'> email:</label>
-                            <input type="text" placeholder='example@gmail.com' className='mt-2 h-11 border-2 border-gray-300 font-light rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2' />
+                            <input onChange={handleChange} name='email' type="text" placeholder='example@gmail.com' className='mt-2 h-11 border-2 border-gray-300 font-light rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2' />
 
                         </div>
                         <div className='flex flex-col w-[80%] mt-6'>
                             <label htmlFor="" className='text-black font-base'> password:</label>
-                            <input type="password" placeholder='**********' className='mt-2 h-11 border-2 border-gray-300 font-light rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2 ' />
+                            <input onChange={handleChange} name='password' type="password" placeholder='**********' className='mt-2 h-11 border-2 border-gray-300 font-light rounded-lg outline-none pl-2 text-gray-600 focus:border-[#3ec1b0] focus:border-2 ' />
                         </div>
 
                         <button className='mt-8 hover:bg- h-11 w-[80%] rounded-lg text-white  font-semibold outline-none pl-2 hover:bg-[#26796e] bg-[#346245]'>
@@ -68,7 +114,7 @@ export default function page() {
                                 Have an account?
                             </span>
                             <span className='text-[#346245] pl-3 font-semibold '>
-                                Log in  
+                                Log in
                             </span>
                         </Link>
                     </div>
