@@ -34,7 +34,7 @@ export default function page() {
             }
              else if (response) {
                 toast.success('registration successfully');
-                router.push('/pages/dashboard/user-dashboard');
+                router.push('/globalPages/dashboard/user-dashboard');
             }
             else {
                 toast.error('Something Wrong');
@@ -105,7 +105,7 @@ export default function page() {
                     </form>
 
                     <div className='w-[80%]  text-center h-10  text-sm font-light'>
-                        <Link href="/pages/auth/login">
+                        <Link href="/globalPages/auth/login">
 
                             <span className='text-black'>
                                 Have an account?

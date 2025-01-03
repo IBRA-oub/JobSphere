@@ -9,7 +9,7 @@ export default function page() {
                 <TopNav sectionName={'Apply'} />
             </div>
 
-            <div className='w-[98%] h-auto  grid grid-cols-2 gap-5 mt-9 '>
+            <div className='w-[98%] h-auto  grid grid-cols-1 md:grid-cols-2 gap-5 mt-9 '>
                 <ApplyedJob/>
                 <ApplyedJob/>
                 <ApplyedJob/>

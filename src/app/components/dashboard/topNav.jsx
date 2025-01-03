@@ -1,8 +1,18 @@
 "use client"
-import React ,{useState} from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
 
 export default function TopNav({ sectionName }) {
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter()
+    const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        localStorage.removeItem('fullName');
+        localStorage.removeItem('email');
+        document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        router.push('/');
+    }
     return (
         <section className='w-full h-full bg-white flex justify-between items-center'>
             <div className='w-[20%] h-3/4 '>
@@ -50,7 +60,7 @@ export default function TopNav({ sectionName }) {
                         <div className="absolute right-0 mt-2 w-40 bg-gray-100 rounded-md shadow-lg z-10">
                             <ul className="py-2">
                                 <li className="px-4 py-2 hover:bg-gray-100 text-gray-400 hover:text-black cursor-pointer">Profile</li>
-                                <li className="px-4 py-2 hover:bg-gray-100 text-gray-400 hover:text-black cursor-pointer">Log Out</li>
+                                <li onClick={logout} className="px-4 py-2 hover:bg-gray-100 text-gray-400 hover:text-black cursor-pointer">Log Out</li>
                             </ul>
                         </div>
                     )}

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import Cookies from 'js-cookie';
 
 
 const initialState = {
@@ -12,7 +13,14 @@ export const login = createAsyncThunk('auth/login', async (data, { rejectWithVal
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL}/api/auth/login`, data);
         const { token, existingUser } = response.data;
+        Cookies.set('token', token, {
+            httpOnly: false, 
+            secure: process.env.NODE_ENV,
+            sameSite: 'strict', 
+            expires: 1, 
+          });
         localStorage.setItem('token', token);
+        localStorage.setItem('fullName', existingUser.fullName);
         localStorage.setItem('email', existingUser.email);
         localStorage.setItem('id', existingUser._id);
         return response.data

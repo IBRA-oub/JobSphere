@@ -73,7 +73,7 @@ export default function JobCard({ width, job }) {
                     </div>
 
                 </div>
-                <Link href={`/pages/page/all-job/${job._id}`} className='mr-3 px-4 py-2 bg-[#309688] rounded-md text-white cursor-pointer hover:bg-[#25756a] hover:shadow-sm  transition duration-300 ease-in-out'>
+                <Link href={`/globalPages/job-pages/all-job/${job._id}`} className='mr-3 px-4 py-2 bg-[#309688] rounded-md text-white cursor-pointer hover:bg-[#25756a] hover:shadow-sm  transition duration-300 ease-in-out'>
                     Job Details
                 </Link>
 

@@ -32,9 +32,9 @@ export default function Login() {
               toast.success('logged successfully');
               const email = localStorage.getItem('email');
               if(email == "brahimoubourrih@gmail.com"){
-                router.push('/pages/dashboard/admin-dashboard');
+                router.push('/globalPages/dashboard/admin-dashboard');
               }else{
-                router.push('/pages/dashboard/user-dashboard');
+                router.push('/globalPages/dashboard/user-dashboard');
               }
           }
           else {
@@ -84,7 +84,7 @@ export default function Login() {
               Submit
             </button>
             <div className='w-[80%] text-end  text-sm font-light'>
-              <Link href="/pages/auth/register">
+              <Link href="/globalPages/auth/register">
                 <span className='text-white'>
                   haven't account?
                 </span>
