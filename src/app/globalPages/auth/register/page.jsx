@@ -1,16 +1,13 @@
 "use client"
 import { register } from '@/lib/frontend/redux/features/registerSlice';
-import { registerSelectors } from '@/lib/frontend/redux/selectors/registerSelectors';
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, } from 'react-redux';
 import { toast } from "react-toastify";
 import {useRouter} from "next/navigation";
 
 
 export default function page() {
-    const selector = useSelector(registerSelectors)
-    // console.log(selector)
     const dispatch = useDispatch()
     const router = useRouter()
     const [data, setData] = useState({
@@ -37,7 +34,7 @@ export default function page() {
             }
              else if (response) {
                 toast.success('registration successfully');
-                router.push('/pages/dashboard/user-dashboard');
+                router.push('/globalPages/dashboard/user-dashboard');
             }
             else {
                 toast.error('Something Wrong');
@@ -108,7 +105,7 @@ export default function page() {
                     </form>
 
                     <div className='w-[80%]  text-center h-10  text-sm font-light'>
-                        <Link href="/pages/auth/login">
+                        <Link href="/globalPages/auth/login">
 
                             <span className='text-black'>
                                 Have an account?

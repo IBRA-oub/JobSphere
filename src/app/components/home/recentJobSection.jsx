@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react'
 import JobCard from './jobCard'
 import Link from 'next/link'
-import { jobSelectors } from '@/lib/frontend/redux/selectors/jobSelectors'
 import { useDispatch, useSelector } from 'react-redux'
-import { getJobs } from '@/lib/frontend/redux/features/jobSlice'
+import { jobSelectors } from '/src/lib/frontend/redux/selectors/jobSelectors'
+import { getJobs } from '/src/lib/frontend/redux/features/jobSlice'
 
 export default function RecentJobSection() {
     const jobs = useSelector(jobSelectors)

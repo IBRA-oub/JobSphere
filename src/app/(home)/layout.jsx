@@ -2,7 +2,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-
 export default function RootLayout({ children }) {
   return (
     <>
@@ -20,13 +19,13 @@ export default function RootLayout({ children }) {
         </div>
         <div className="flex justify-between w-96  text-gray-400 ">
           <Link href="/" className="hover:text-white">Home </Link>
-          <Link href="/pages/page/all-job" className="hover:text-white">Jobs </Link>
+          <Link href="/globalPages/job-pages/all-job" className="hover:text-white">Jobs </Link>
           <Link href="/" className="hover:text-white">About Us </Link>
           <Link href="/" className="hover:text-white">Contact Us </Link>
         </div>
         <div className="w-32 flex justify-between">
-          <button className="mr-4 hover:drop-shadow-2xl"> <Link href="/pages/auth/login">Login</Link> </button>
-          <button className="py-2 rounded-md px-5 bg-[#309689] hover:bg-[#298377] hover:shadow-sm hover:shadow-white transition duration-500 ease-in-out"><Link href="/pages/auth/register">Register</Link></button>
+          <button className="mr-4 hover:drop-shadow-2xl"> <Link href="/globalPages/auth/login">Login</Link> </button>
+          <button className="py-2 rounded-md px-5 bg-[#309689] hover:bg-[#298377] hover:shadow-sm hover:shadow-white transition duration-500 ease-in-out"><Link href="/globalPages/auth/register">Register</Link></button>
         </div>
       </nav>
 
