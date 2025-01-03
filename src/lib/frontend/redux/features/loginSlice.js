@@ -8,37 +8,37 @@ const initialState = {
     error: null,
 }
 
-export const register = createAsyncThunk('auth/register', async (data, { rejectWithValue }) => {
+export const login = createAsyncThunk('auth/login', async (data, { rejectWithValue }) => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL}/api/auth/register`, data);
-        const { token, user } = response.data;
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL}/api/auth/login`, data);
+        const { token, existingUser } = response.data;
         localStorage.setItem('token', token);
-        localStorage.setItem('fullName', user.fullName);
-        localStorage.setItem('id', user._id);
+        localStorage.setItem('email', existingUser.email);
+        localStorage.setItem('id', existingUser._id);
         return response.data
     } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
     }
 })
 
-const registerSlice = createSlice({
-    name: 'register',
+const loginSlice = createSlice({
+    name: 'login',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(register.pending, (state) => {
+            .addCase(login.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload
             })
-            .addCase(register.rejected), (state, action) => {
+            .addCase(login.rejected), (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             }
     }
 });
-export default registerSlice.reducer
+export default loginSlice.reducer

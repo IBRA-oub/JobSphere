@@ -1,8 +1,50 @@
 "use client"
+import { login } from '@/lib/frontend/redux/features/loginSlice';
 import Link from 'next/link'
+import {useRouter} from "next/navigation";
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify';
 
 export default function Login() {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const [data, setData] = useState({
+      email: '',
+      password: ''
+  });
+
+  const handleChange = (e) => {
+      setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async(e) => {
+      e.preventDefault()
+      try {
+          const response = await dispatch(login(data))
+          if (response.payload.status == 409) {
+              toast.error('Email Incorrect');
+          }
+          else if (response.payload.status == 500) {
+              toast.error('All Input Required');
+          }
+           else if (response) {
+              toast.success('logged successfully');
+              const email = localStorage.getItem('email');
+              if(email == "brahimoubourrih@gmail.com"){
+                router.push('/pages/dashboard/admin-dashboard');
+              }else{
+                router.push('/pages/dashboard/user-dashboard');
+              }
+          }
+          else {
+              toast.error('Something Wrong');
+          }
+      } catch (error) {
+
+      }
+
+  }
   const [showPassword, setShowPassword] = useState(false);
   return (
     <section className='relative h-[100vh] w-full bg-[#020202] flex'>
@@ -13,11 +55,11 @@ export default function Login() {
             <p className='bungee mb-2'>Welcome</p>
             <p className='h-1 border-b-2 w-[70%]  rounded-lg'></p>
           </div>
-          <form action="" className='h-96 flex flex-col items-center  w-full  mt-10'>
+          <form onSubmit={handleSubmit} className='h-96 flex flex-col items-center  w-full  mt-10'>
             <div className='flex flex-col w-[80%]'>
               <label htmlFor="" className='text-white font-light'>Your email:</label>
               <div className='flex items-center w-full h-12 rounded-lg bg-white hover:border-[#3ec1b0] hover:ring hover:ring-[#3ec1b0] '>
-                <input type="email" className=' w-[95%] h-11 rounded-lg outline-none pl-2 text-gray-600 ' />
+                <input onChange={handleChange} name='email' type="email" className=' w-[95%] h-11 rounded-lg outline-none pl-2 text-gray-600 ' />
                 <span className='h-4 w-7 flex justify-center cursor-pointer '>
                   <svg xmlns="http://www.w3.org/2000/svg" height="20" width="25" viewBox="0 0 576 512"><path fill="#80808097" d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z" /></svg>
                 </span>
@@ -25,9 +67,8 @@ export default function Login() {
             </div>
             <div className='flex flex-col w-[80%] mt-6'>
               <label htmlFor="" className='text-white font-light'>Your password:</label>
-
               <div className='flex items-center w-full h-12 rounded-lg bg-white hover:border-[#3ec1b0] hover:ring hover:ring-[#3ec1b0] '>
-                <input type={showPassword ? "text" : "password"} className=' w-[95%] h-11 rounded-lg outline-none pl-2 text-gray-600  ' />
+                <input onChange={handleChange} name='password' type={showPassword ? "text" : "password"} className=' w-[95%] h-11 rounded-lg outline-none pl-2 text-gray-600  ' />
                 <span className='h-4 w-7 flex justify-center cursor-pointer ' onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" width="25" viewBox="0 0 640 512"><path fill="#80808097" d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z" /></svg>
