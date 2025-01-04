@@ -2,6 +2,8 @@ import localFont from "next/font/local";
 import "../../globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export const metadata = {
@@ -37,6 +39,7 @@ export default function RootLayout({ children }) {
           </div>
         </nav>
         {children}
+        <ToastContainer />
       </body>
     </html>
   )

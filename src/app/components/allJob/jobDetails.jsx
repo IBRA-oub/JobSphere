@@ -5,10 +5,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../home/footer';
 import Link from 'next/link';
+import PopUpApply from './popUpApply';
 
 export default function JobDetails({ jobId }) {
     const [jobDetail, setJobDetail] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showPopUp , setShowPopUp] = useState(false)
 
     const jobs = useSelector(jobSelectors)
     const allJobs = jobs.jobs;
@@ -70,9 +72,14 @@ export default function JobDetails({ jobId }) {
         )
     }
 
+    const handleShowPopUp = ()=>{
+        setShowPopUp(!showPopUp)
+    }
+
 
     return (
         <>
+        {showPopUp && <PopUpApply jobId={jobId} onClose={handleShowPopUp}/> }
             <section className='min-h-[150vh]'>
                 <div className='h-44 w-full bg-black text-white flex justify-center items-center'>
                     <p className="text-8xl font-bold text-white drop-shadow-[0_0px_10px_rgba(48,150,137,2)]">
@@ -110,9 +117,10 @@ export default function JobDetails({ jobId }) {
 
 
                         </div>
-                        <div className='mr-3 w-52 text-center px-4 py-2 bg-[#309688] rounded-md text-white cursor-pointer hover:bg-[#25756a] hover:shadow-sm  transition duration-300 ease-in-out'>
+                        <div onClick={handleShowPopUp} className='mr-3 w-52 text-center px-4 py-2 bg-[#309688] rounded-md text-white cursor-pointer hover:bg-[#25756a] hover:shadow-sm  transition duration-300 ease-in-out'>
                             Apply Job
                         </div>
+                        
 
                     </div>
                     <div className='w-[90%]  flex space-x-7  h-16'>

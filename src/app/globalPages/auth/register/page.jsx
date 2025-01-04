@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { useDispatch, } from 'react-redux';
 import { toast } from "react-toastify";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 export default function page() {
@@ -21,18 +21,17 @@ export default function page() {
         setData({ ...data, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             const response = await dispatch(register(data))
-            console.log('respoonse', response.payload.status)
             if (response.payload.status == 409) {
                 toast.error('Email Already Exist');
             }
             else if (response.payload.status == 500) {
                 toast.error('All Input Required');
             }
-             else if (response) {
+            else if (response) {
                 toast.success('registration successfully');
                 router.push('/globalPages/dashboard/user-dashboard');
             }
@@ -40,7 +39,7 @@ export default function page() {
                 toast.error('Something Wrong');
             }
         } catch (error) {
-
+            return error
         }
 
     }

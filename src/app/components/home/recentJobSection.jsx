@@ -34,7 +34,7 @@ export default function RecentJobSection() {
                         </p>
                         <p className='text-[#309689] flex justify-center items-center cursor-pointer hover:border-2 hover:border-[#309689] px-3 py-1 rounded-md'>
                             <span>
-                                <Link href="/pages/all-job">
+                                <Link href="/globalPages/job-pages/all-job">
                                     view all
                                 </Link>
                             </span>
