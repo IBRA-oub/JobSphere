@@ -13,16 +13,19 @@ export const register = createAsyncThunk('auth/register', async (data, { rejectW
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL}/api/auth/register`, data);
         const { token, user } = response.data;
-         Cookies.set('token', token, {
-                    httpOnly: false, 
-                    secure: process.env.NODE_ENV,
-                    sameSite: 'strict', 
-                    expires: 1, 
-                  });
-        localStorage.setItem('token', token);
-        localStorage.setItem('fullName', user.fullName);
-        localStorage.setItem('email', user.email);
-        localStorage.setItem('id', user._id);
+        if (token && user) {
+            Cookies.set('token', token, {
+                httpOnly: false,
+                secure: process.env.NODE_ENV,
+                sameSite: 'strict',
+                expires: 1,
+            });
+            localStorage.setItem('token', token);
+            localStorage.setItem('fullName', user.fullName);
+            localStorage.setItem('email', user.email);
+            localStorage.setItem('id', user._id);
+        }
+
         return response.data
     } catch (error) {
         return rejectWithValue(error.response?.data || error.message);

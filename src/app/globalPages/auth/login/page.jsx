@@ -1,7 +1,7 @@
 "use client"
 import { login } from '@/lib/frontend/redux/features/loginSlice';
 import Link from 'next/link'
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
@@ -10,39 +10,39 @@ export default function Login() {
   const dispatch = useDispatch()
   const router = useRouter()
   const [data, setData] = useState({
-      email: '',
-      password: ''
+    email: '',
+    password: ''
   });
 
   const handleChange = (e) => {
-      setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e) => {
-      e.preventDefault()
-      try {
-          const response = await dispatch(login(data))
-          if (response.payload.status == 409) {
-              toast.error('Email Incorrect');
-          }
-          else if (response.payload.status == 500) {
-              toast.error('All Input Required');
-          }
-           else if (response) {
-              toast.success('logged successfully');
-              const email = localStorage.getItem('email');
-              if(email == "brahimoubourrih@gmail.com"){
-                router.push('/globalPages/dashboard/admin-dashboard');
-              }else{
-                router.push('/globalPages/dashboard/user-dashboard');
-              }
-          }
-          else {
-              toast.error('Something Wrong');
-          }
-      } catch (error) {
-
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await dispatch(login(data))
+      if (response.payload.status == 409 || response.payload.status == 401 ) {
+        toast.error('Email or Password Incorrect');
       }
+      else if (response) {
+        toast.success('logged successfully');
+        const email = localStorage.getItem('email');
+        if (email == "brahimoubourrih@gmail.com") {
+          router.push('/globalPages/dashboard/admin-dashboard');
+        } else {
+          router.push('/globalPages/dashboard/user-dashboard');
+        }
+      }
+      else if (response.payload.status == 500) {
+        toast.error('All Input Required');
+      }
+      else {
+        toast.error('Something Wrong');
+      }
+    } catch (error) {
+
+    }
 
   }
   const [showPassword, setShowPassword] = useState(false);

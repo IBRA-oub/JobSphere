@@ -9,6 +9,7 @@ export default function FilterSection() {
     // dispatch data
     const jobs = useSelector(jobSelectors)
     const allJobs = jobs.jobs;
+    if (!Array.isArray(allJobs)) return null
     const dispatch = useDispatch();
 
     // pagination
@@ -84,7 +85,7 @@ export default function FilterSection() {
             })
         }
         if (selectedCity) {
-            console.log('hey')
+            
             jobCopy = jobCopy.filter((item) =>
                 item.jobLocation === selectedCity
             );

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export default function JobCard({ width, job }) {
+    if (!job || !job.createdAt || !job.jobTitle) return null;
     return (
         <div className={`w-[${width}] h-52 bg-gray-100 rounded-md mt-4`}>
             <div className='flex justify-between items-center w-full h-8 '>
