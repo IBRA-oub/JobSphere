@@ -25,15 +25,21 @@ export default function page() {
         e.preventDefault()
         try {
             const response = await dispatch(register(data))
-            if (response.payload.status == 409) {
+            console.log(response)
+            
+            if (response.payload.status == 201) {
+               
+                toast.success('registration successfully');
+                router.push('/globalPages/dashboard/user-dashboard');
+            }
+            else if (response.payload.status == 409) {
                 toast.error('Email Already Exist');
             }
             else if (response.payload.status == 500) {
                 toast.error('All Input Required');
             }
-            else if (response) {
-                toast.success('registration successfully');
-                router.push('/globalPages/dashboard/user-dashboard');
+            else if (response.error.message === 'Rejected') {
+                toast.error('All Input Required');
             }
             else {
                 toast.error('Something Wrong');

@@ -85,7 +85,7 @@ export default function FilterSection() {
             })
         }
         if (selectedCity) {
-            console.log('hey')
+            
             jobCopy = jobCopy.filter((item) =>
                 item.jobLocation === selectedCity
             );

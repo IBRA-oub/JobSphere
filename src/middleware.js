@@ -8,26 +8,7 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL('/globalPages/auth/login', req.url));
   }
 
-  try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
-    const { payload } = await jwtVerify(token, secret);
-
-    if (payload.email === 'brahimoubourrih@gmail.com') {
-      if (req.nextUrl.pathname.startsWith('/globalPages/dashboard/admin-dashboard')) {
-        return NextResponse.next(); 
-      }
-      return NextResponse.redirect(new URL('/globalPages/dashboard/admin-dashboard', req.url));
-    } else {
-      if (req.nextUrl.pathname.startsWith('/globalPages/dashboard/admin-dashboard')) {
-        return NextResponse.redirect(new URL('/globalPages/dashboard/user-dashboard', req.url));
-      }
-
-      return NextResponse.next();
-    }
-  } catch (err) {
-    console.error('Invalid or expired token:', err);
-    return NextResponse.redirect(new URL('/globalPages/auth/login', req.url));
-  }
+  return NextResponse.next();
 }
 
 export const config = {

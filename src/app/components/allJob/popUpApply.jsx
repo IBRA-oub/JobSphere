@@ -58,7 +58,7 @@ export default function PopUpApply({ jobId, onClose }) {
             }
 
             const response = await dispatch(application(allData))
-            console.log(response);
+            
             if(response.payload.message === 'You have already applied for this job.'){
                 toast.error('You have already applied for this job');
                 onClose()
