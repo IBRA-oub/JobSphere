@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 Consultation des Offres d'Emploi
 
-## Getting Started
+## 📝 Description du Projet
+Cette application permet aux utilisateurs de consulter, rechercher et postuler à des offres d'emploi. Les administrateurs disposent d'outils de gestion des candidatures.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌟 Fonctionnalités
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🔍 Consultation des Offres d'Emploi
+- 📋 **Afficher** la liste des offres disponibles via une API tierce.
+- 🔎 **Rechercher** des offres par :
+  - 🏷️ **Titre**
+  - 📍 **Localisation**
+  - 📝 **Type de contrat**
+- 🧹 **Filtrer** les résultats pour une recherche plus précise.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 👩‍💼👨‍💼 Gestion des Candidatures
+- 🆕 **Créer un compte** et se connecter pour accéder aux fonctionnalités.
+- 📨 **Postuler** directement depuis l'application.
+- 📊 **Suivre l'état** de la candidature :
+  - ⏳ **En attente**
+  - ✅ **Acceptée**
+  - ❌ **Refusée**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### ⚙️ Administration
+- 👀 **Visualiser** toutes les candidatures reçues.
+- 🔄 **Mettre à jour** le statut des candidatures.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technologies Utilisées
+- **Frontend** : Next.js, Tailwind CSS
+- **Backend** : Node.js, Nest , pour API des offres d'mplois
+- **Base de Données** : MongoDB
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🚀 Installation et Démarrage
 
-## Deploy on Vercel
+### 🖥️ Pré-requis
+- Node.js installé sur votre machine.
+- Un gestionnaire de paquets comme `npm` ou `yarn`.
+- MongoDB configuré localement ou sur un serveur cloud.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 📦 Installation
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/IBRA-oub/JobSphere
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2.Accédez au dossier du projet :
+   ```bash
+   cd JobSphere
+
+3.Installez les dépendances :
+   ````bash
+   npm install
+
+## ▶️ Lancer le Projet
+   ````bash
+   npm run dev
+
