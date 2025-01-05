@@ -48,11 +48,11 @@ Cette application permet aux utilisateurs de consulter, rechercher et postuler �
    ```bash
    git clone https://github.com/IBRA-oub/JobSphere
 
-2.Accédez au dossier du projet :
+2. Accédez au dossier du projet :
    ```bash
    cd JobSphere
 
-3.Installez les dépendances :
+3. Installez les dépendances :
    ````bash
    npm install
 
