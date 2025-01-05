@@ -22,9 +22,8 @@ export default function Login() {
     e.preventDefault()
     try {
       const response = await dispatch(login(data))
-      console.log(response)
-      if (response.payload.status == 409) {
-        toast.error('Email Incorrect');
+      if (response.payload.status == 409 || response.payload.status == 401 ) {
+        toast.error('Email or Password Incorrect');
       }
       else if (response) {
         toast.success('logged successfully');

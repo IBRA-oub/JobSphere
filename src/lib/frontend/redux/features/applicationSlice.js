@@ -10,7 +10,7 @@ const initialState = {
 
 export const application = createAsyncThunk('/application', async (data, { rejectWithValue }) => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL}/api/apply`, data);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL}/api/application`, data);
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response?.data || error.message)
