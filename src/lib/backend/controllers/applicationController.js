@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/config/mongodb"
 import ApplicationSchema from "@/lib/backend/models/application";
+import jwt from 'jsonwebtoken';
 export const ApplicationController = {
 
     async apply(req) {
@@ -61,9 +62,19 @@ export const ApplicationController = {
             return { message: "An error occurred during Application.", status: 500, error };
 
         }
+    },
 
-
-
+    async getUserApplication(token) {
+        try {
+            await dbConnect()
+            const secretKey = process.env.JWT_SECRET_KEY;
+            const decoded = jwt.verify(token, secretKey);
+            const getEmail = decoded.email;
+            const application = await ApplicationSchema.find({ email: getEmail })
+            return { message: "success", status: 200 , application }
+        } catch (error) {
+            return { message: "An error occurred during geting application.", status: 500, error };
+        }
     }
 
 }
